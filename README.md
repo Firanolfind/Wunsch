@@ -5,13 +5,13 @@ Class with Promise featured methods. Ability to wrapp methods and use async meth
 
 You can create new wunsch object:
 ```
-const Wunsch = require('wunsch');
+const Wunsch = require('wunsch-mixin');
 const wObj = new Wunsch;
 ```
 
 Or you can mutate existing object:
 ```
-const Wunsch = require('wunsch');
+const Wunsch = require('wunsch-mixin');
 const someObj = {};
 
 Wunsch.extend(someObj);
