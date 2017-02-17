@@ -47,6 +47,7 @@ Then we want to use them one after another, in right sequence. Also we can handl
 wOjb.asyncMethod1()
     .asyncMethod2()
     .promise(cb=>{
+        console.log('Custom Promise');
         setTimeout(cb, 1000);
     })
     .then(()=>{
@@ -56,4 +57,12 @@ wOjb.asyncMethod1()
         console.error('Error:', err);
     });
 
+```
+
+Result:
+```
+Method 1
+Method 2
+Custom Promise
+The End!
 ```
