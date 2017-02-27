@@ -1,6 +1,12 @@
 # Wunsch
 Class with Promise featured methods. Ability to wrapp methods and use async methods in sync way
 
+### Install
+
+```
+npm install wunsch-mixin --save
+```
+
 ### How to create
 
 You can create new wunsch object:
@@ -80,7 +86,7 @@ The End!
 
 
 ### Test Examples
-#### 1
+#### 1)
 ```
 Wunsch = require('./index.js')
 var obj = {};
