@@ -1,21 +1,38 @@
 # Wunsch
 Class with Promise featured methods. Ability to wrapp methods and use async methods in sync way
 
+### Install
+
+```
+npm install wunsch-mixin --save
+```
+
 ### How to create
 
 You can create new wunsch object:
 ```
-const Wunsch = require('wunsch');
+const Wunsch = require('wunsch-mixin');
 const wObj = new Wunsch;
+```
+
+Or extend as class:
+```
+const Wunsch = require('wunsch-mixin');
+const wClass = class extends Wunsch{
+    // ...
+}
+
+const wObj = new wClass()
+// ... do stuff with wObj
 ```
 
 Or you can mutate existing object:
 ```
-const Wunsch = require('wunsch');
+const Wunsch = require('wunsch-mixin');
 const someObj = {};
 
 Wunsch.extend(someObj);
-//... do stuff with someObj
+// ... do stuff with someObj
 ```
 
 
@@ -47,6 +64,7 @@ Then we want to use them one after another, in right sequence. Also we can handl
 wOjb.asyncMethod1()
     .asyncMethod2()
     .promise(cb=>{
+        console.log('Custom Promise');
         setTimeout(cb, 1000);
     })
     .then(()=>{
@@ -56,4 +74,24 @@ wOjb.asyncMethod1()
         console.error('Error:', err);
     });
 
+```
+
+Result:
+```
+Method 1
+Method 2
+Custom Promise
+The End!
+```
+
+
+### Test Examples
+#### 1)
+```
+Wunsch = require('./index.js')
+var obj = {};
+obj.test = function(cb){ if(!cb) return this.promise(obj.test); setTimeout(()=>{console.log('100!'); cb('100!')}, 1000);}
+obj.test2 = function(cb){ if(!cb) return this.promise(obj.test2); setTimeout(()=>{console.log('200!'); cb('200!')}, 2000);}
+Wunsch.extend(obj);
+obj.test().test2().then(console.log('End!')).catch(e=>{console.log('Promise Failed', e)});
 ```
