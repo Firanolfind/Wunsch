@@ -9,13 +9,24 @@ const Wunsch = require('wunsch-mixin');
 const wObj = new Wunsch;
 ```
 
+Or extend as class:
+```
+const Wunsch = require('wunsch-mixin');
+const wClass = class extends Wunsch{
+    // ...
+}
+
+const wObj = new wClass()
+// ... do stuff with wObj
+```
+
 Or you can mutate existing object:
 ```
 const Wunsch = require('wunsch-mixin');
 const someObj = {};
 
 Wunsch.extend(someObj);
-//... do stuff with someObj
+// ... do stuff with someObj
 ```
 
 
@@ -65,4 +76,16 @@ Method 1
 Method 2
 Custom Promise
 The End!
+```
+
+
+### Test Examples
+#### 1
+```
+Wunsch = require('./index.js')
+var obj = {};
+obj.test = function(cb){ if(!cb) return this.promise(obj.test); setTimeout(()=>{console.log('100!'); cb('100!')}, 1000);}
+obj.test2 = function(cb){ if(!cb) return this.promise(obj.test2); setTimeout(()=>{console.log('200!'); cb('200!')}, 2000);}
+Wunsch.extend(obj);
+obj.test().test2().then(console.log('End!')).catch(e=>{console.log('Promise Failed', e)});
 ```
